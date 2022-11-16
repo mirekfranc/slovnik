@@ -32,6 +32,7 @@ fn main() {
         }
     } else {
         eprintln!("Couldn't connect to \"{}\"!", &url);
+        std::process::exit(1);
     }
 }
 
