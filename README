@@ -1,0 +1,40 @@
+```
+# By default program scraps and prints maximal number of lines, 50.
+# One can limit the number of lines by setting SLOVNIK_LINES variable.
+
+export SLOVNIK_LINES=<N>
+
+# where N is between 5 and 50 inclusive
+
+
+# By default program prints translations from English to Czech.
+# Other translations are selected by suffixing program with the following suffixes.
+
+# English (ec, ce)
+./slovnik house
+./slovnik-ec house
+./slovnik-ce dum
+
+# French (fc, cf)
+./slovnik-fc maison
+./slovnik-cf dum
+
+# Italian (ic, ci)
+./slovnik-ic casa
+./slovnik-ci dum
+
+# Russian (rc, cr)
+./slovnik-rc Доm
+./slovnik-cr dum
+
+# German (gc, cg)
+./slovnik-gc Hous
+./slovnik-cg dum
+
+# Spanish (sc, cs)
+./slovnik-sc casa
+./slovnik-cs dum
+
+# Suffix "slovnik-" is not important and can be replaced by arbitrary name.
+./dfc maison  # suffix fc (French to Czech)
+```
