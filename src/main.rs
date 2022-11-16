@@ -21,12 +21,14 @@ fn main() {
     let url = format!("https://www.slovnik.cz/bin/mld.fpl?vcb={}&dictdir={}&lines={}&js=0", &phrase, &dict, get_n_lines());
 
     if let Some(html) = get_html(&url) {
-        let document = scraper::Html::parse_document(&html);
-        let l_sel = scraper::Selector::parse("div.pair>span.l").unwrap();
-        let r_sel = scraper::Selector::parse("div.pair>span.r").unwrap();
+        use scraper::*;
+        let document = Html::parse_document(&html);
+        let l_sel = Selector::parse("div.pair>span.l").unwrap();
+        let r_sel = Selector::parse("div.pair>span.r").unwrap();
+        let sel = Selector::parse("a").unwrap();
 
         for (l, r) in document.select(&l_sel).zip(document.select(&r_sel)) {
-            println!("\t{} --> {}", get_joined_words(&l), get_joined_words(&r));
+            println!("\t{} --> {}", get_joined_words(&l, &sel), get_joined_words(&r, &sel));
         }
     } else {
         eprintln!("Couldn't connect to \"{}\"!", &url);
@@ -42,16 +44,10 @@ fn get_n_lines() -> u32 {
     match std::env::var("SLOVNIK_LINES").ok() {
         Some(n) =>
             if let Ok(x) = n.parse::<u32>() {
-                if x < 5 {
-                    5
-                } else if x > default {
-                    default
-                } else {
-                    x
-                }
+                std::cmp::min(std::cmp::max(x, 5), default)
             } else {
                 default
-            }
+            },
         None => default,
     }
 }
@@ -65,7 +61,6 @@ fn get_html(url: &str) -> Option<String> {
     rsp.text().ok()
 }
 
-fn get_joined_words(e: &scraper::ElementRef) -> String {
-    let sel = scraper::Selector::parse("a").unwrap();
+fn get_joined_words(e: &scraper::ElementRef, sel: &scraper::Selector) -> String {
     e.select(&sel).map(|x| x.inner_html()).collect::<Vec<_>>().join(" ")
 }
