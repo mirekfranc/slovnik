@@ -1,4 +1,3 @@
-```
 # By default program scraps and prints maximal number of lines, 50.
 # One can limit the number of lines by setting SLOVNIK_LINES variable.
 
@@ -8,7 +7,7 @@ export SLOVNIK_LINES=<N>
 
 
 # By default program prints translations from English to Czech.
-# Other translations are selected by suffixing program with the following suffixes.
+# Other translations are selected by suffixing program with 2 letters:
 
 # English (ec, ce)
 ./slovnik house
@@ -35,6 +34,5 @@ export SLOVNIK_LINES=<N>
 ./slovnik-sc casa
 ./slovnik-cs dum
 
-# Suffix "slovnik-" is not important and can be replaced by arbitrary name.
+# Prefix "slovnik-" is not important and can be replaced by arbitrary string.
 ./dfc maison  # suffix fc (French to Czech)
-```
