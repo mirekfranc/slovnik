@@ -27,7 +27,7 @@ export SLOVNIK_LINES=<N>
 ./slovnik-cr dum
 
 # German (gc, cg)
-./slovnik-gc Hous
+./slovnik-gc Haus
 ./slovnik-cg dum
 
 # Spanish (sc, cs)
@@ -35,4 +35,5 @@ export SLOVNIK_LINES=<N>
 ./slovnik-cs dum
 
 # Prefix "slovnik-" is not important and can be replaced by arbitrary string.
-./dfc maison  # suffix fc (French to Czech)
+# Multiple words per entry are possible.
+./dfc maison blanche # suffix fc (French to Czech) (translation: "bílý dům")
