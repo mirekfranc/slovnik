@@ -42,14 +42,8 @@ fn get_programs_rsuffix() -> String {
 
 fn get_n_lines() -> u32 {
     const DEFAULT: u32 = 50;
-    match std::env::var("SLOVNIK_LINES").ok() {
-        Some(n) =>
-            match n.parse::<u32>().ok() {
-                Some(x) => std::cmp::min(std::cmp::max(x, 5), DEFAULT),
-                None => DEFAULT,
-            },
-        None => DEFAULT,
-    }
+    std::env::var("SLOVNIK_LINES")
+        .map_or(DEFAULT, |x| x.parse::<u32>().map_or(DEFAULT, |y| std::cmp::min(std::cmp::max(y, 5), DEFAULT)))
 }
 
 fn get_phrase() -> String {
